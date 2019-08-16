@@ -155,7 +155,7 @@ def handleFileUpload():
             spider_name = "hudong"
             subprocess.check_output(['python3', 'extracter.py', photo.filename])
             with open("result.json") as items_file:
-                return items_file.read()
+                return items_file.decode('utf-8').read()
             # print(text)
             # run_spider()
             # process.crawl(HudongSpider, file)
