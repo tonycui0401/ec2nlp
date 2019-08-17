@@ -206,11 +206,11 @@ def handleFileUpload():
 @application.route('/users/')
 def users():
     filename = os.path.join('result.json')
-    with open(filename) as blog_file:
+    with open(filename,  encoding='utf-8') as blog_file:
         dictvalue = []
         dictvalueEx = []
         images= []
-        data = json.load(blog_file, encoding='bytes')
+        data = json.load(blog_file)
         data = np.array(data)
         for i in data.flat:
            dictvalue.append(i['title'])
