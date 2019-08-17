@@ -13,9 +13,11 @@ from twisted.internet import reactor
 from scrapy.crawler import CrawlerRunner
 from scrapy.utils.project import get_project_settings
 import subprocess
+import json
+import numpy as np
 
-Pokemons =["Pikachu", "Charizard", "Squirtle", "Jigglypuff",  
-           "Bulbasaur", "Gengar", "Charmander", "Mew", "Lugia", "Gyarados"] 
+# Pokemons =["Pikachu", "Charizard", "Squirtle", "Jigglypuff",  
+#            "Bulbasaur", "Gengar", "Charmander", "Mew", "Lugia", "Gyarados"] 
 # # print a nice greeting.
 # def say_hello(username = "World"):
 #     return '<p>Hello %s!</p>\n' % username
@@ -38,6 +40,18 @@ application = Flask(__name__)
 
 split_sign = '##'  # 定义分隔符
 filename = 'example.ppt'
+
+
+
+# filename = os.path.join('result.json')
+# with open(filename) as blog_file:
+#     data = json.load(blog_file)
+#     data = np.array(data)
+#     for i in data.flat:
+#        dictvalue.append(i['title'])
+#         # print(i)
+
+# print (dictvalue)
 
 class HudongSpider(scrapy.Spider):
     name = "hudong"  # 爬虫启动命令：scrapy crawl hudong -o items.json -s FEED_EXPORT_ENCODING=UTF-8
@@ -148,6 +162,7 @@ def handleFileUpload():
         photo = request.files['photo']
         if photo.filename != '':            
             photo.save(os.path.join(photo.filename))
+            os.remove("result.json")
             file = photo.filename
             parsed = parser.from_file(photo.filename)
             seg = pkuseg.pkuseg(postag=True)
@@ -186,7 +201,19 @@ def handleFileUpload():
 
 @application.route('/users/')
 def users():
-    return render_template('users.html', len = len(Pokemons), Pokemons = Pokemons)
+    filename = os.path.join('result.json')
+    with open(filename) as blog_file:
+        dictvalue = []
+        dictvalueEx = []
+        images= []
+        data = json.load(blog_file)
+        data = np.array(data)
+        for i in data.flat:
+           dictvalue.append(i['title'])
+           dictvalueEx.append(i['detail'])
+           images.append(i['image'])
+    # print (data)
+    return render_template('users.html', len = len(dictvalue), Pokemons = dictvalue, PokemonsEx = dictvalueEx, Images = images)
 
 # if __name__ == '__main__':
 #     app.run()

@@ -9,8 +9,8 @@
 <ol> 
 <!-- For loop logic of jinja template -->
 {%for i in range(0, len)%} 
-
-	<li>{{Pokemons[i]}}</li> 
+    <img src="{{Images[i]}}"/>
+	<li><b>{{Pokemons[i]}}</b>: {{PokemonsEx[i]}}</li> 
 {%endfor%} 
 
 </ol> 
