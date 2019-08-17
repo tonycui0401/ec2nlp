@@ -15,6 +15,9 @@ from scrapy.utils.project import get_project_settings
 import subprocess
 import json
 import numpy as np
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # Pokemons =["Pikachu", "Charizard", "Squirtle", "Jigglypuff",  
 #            "Bulbasaur", "Gengar", "Charmander", "Mew", "Lugia", "Gyarados"] 
