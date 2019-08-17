@@ -210,7 +210,7 @@ def users():
         dictvalue = []
         dictvalueEx = []
         images= []
-        data = json.load(blog_file, encoding='utf-8')
+        data = json.load(blog_file, encoding='bytes')
         data = np.array(data)
         for i in data.flat:
            dictvalue.append(i['title'])
