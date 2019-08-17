@@ -15,10 +15,10 @@ from scrapy.utils.project import get_project_settings
 import subprocess
 import json
 import numpy as np
-import sys
-from importlib import reload
-reload(sys)
-sys.setdefaultencoding('utf-8')
+# import sys
+# from importlib import reload
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
 
 # Pokemons =["Pikachu", "Charizard", "Squirtle", "Jigglypuff",  
 #            "Bulbasaur", "Gengar", "Charmander", "Mew", "Lugia", "Gyarados"] 
@@ -210,7 +210,7 @@ def users():
         dictvalue = []
         dictvalueEx = []
         images= []
-        data = json.load(blog_file)
+        data = json.load(blog_file, encoding='utf-8')
         data = np.array(data)
         for i in data.flat:
            dictvalue.append(i['title'])
