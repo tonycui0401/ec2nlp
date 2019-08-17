@@ -16,6 +16,7 @@ import subprocess
 import json
 import numpy as np
 import sys
+from importlib import reload
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
